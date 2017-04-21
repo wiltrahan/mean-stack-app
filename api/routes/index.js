@@ -3,6 +3,8 @@ var router = express.Router();
 
 //here, we get the functions from the controller file
 var ctrHotels = require('../controllers/hotels.controllers.js');
+//from the reviews controller
+var ctrReviews = require('../controllers/reviews.controllers.js');
 
 //this sets /hotels as the page that will return the hotel info
 //.get goes to ctrHotels which is defined above, and runs the
@@ -10,18 +12,29 @@ var ctrHotels = require('../controllers/hotels.controllers.js');
 
 router
   .route('/hotels')
-  .get(ctrHotels.hotelsGetAll);
+  .get(ctrHotels.hotelsGetAll)
+  .post(ctrHotels.hotelsAddOne);
 
 //to define a parameter in express, start with a colon
 //the controller can now access this paramater
 router
   .route('/hotels/:hotelId')
-  .get(ctrHotels.hotelsGetOne);
+  .get(ctrHotels.hotelsGetOne)
+  .put(ctrHotels.hotelsUpdateOne)
+  .delete(ctrHotels.hotelsDeleteOne);
 
-//sets up a new route to handle post requests.
+//reviews routes
 router
-  .route('/hotels/new')
-  .post(ctrHotels.hotelsAddOne);
+  .route('/hotels/:hotelId/reviews')
+  .get(ctrReviews.reviewsGetAll)
+  .post(ctrReviews.reviewsAddOne);
+
+
+router
+  .route('/hotels/:hotelId/reviews/:reviewId')
+  .get(ctrReviews.reviewsGetOne)
+  .put(ctrReviews.reviewsUpdateOne)
+  .delete(ctrReviews.reviewsDeleteOne);
 
 module.exports = router;
 

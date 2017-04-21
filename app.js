@@ -1,4 +1,4 @@
-require('./api/data/dbconnection.js').open();
+require('./api/data/db.js');
 //requires the express module
 var express = require('express');
 //designates the app variable to be an express app
