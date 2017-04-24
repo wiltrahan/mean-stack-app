@@ -6,6 +6,8 @@ var ctrHotels = require('../controllers/hotels.controllers.js');
 //from the reviews controller
 var ctrReviews = require('../controllers/reviews.controllers.js');
 
+
+var ctrUsers = require('../controllers/users.controllers.js')
 //this sets /hotels as the page that will return the hotel info
 //.get goes to ctrHotels which is defined above, and runs the
 //hotels.GetAll function that is defined in the controller.js file.
@@ -26,7 +28,7 @@ router
 //reviews routes
 router
   .route('/hotels/:hotelId/reviews')
-  .get(ctrReviews.reviewsGetAll)
+  .get(ctrUsers.authenticate, ctrReviews.reviewsGetAll)
   .post(ctrReviews.reviewsAddOne);
 
 
@@ -36,6 +38,16 @@ router
   .put(ctrReviews.reviewsUpdateOne)
   .delete(ctrReviews.reviewsDeleteOne);
 
+//Authentication
+
+router
+  .route('/users/register')
+  .post(ctrUsers.register);
+
+router
+  .route('/users/login')
+  .post(ctrUsers.login);
+
+
+
 module.exports = router;
-
-

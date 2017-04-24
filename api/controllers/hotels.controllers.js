@@ -59,7 +59,7 @@ var runGeoQuery = function(req, res) {
 module.exports.hotelsGetAll = function(req, res) {
   //here dbconn.get() gets all info from the db
   // var db = dbconn.get();
-
+  console.log('Requested by ' + req.user);
   //here we are saying use the current db connection and use the collection
   //called hotels
     // var collection = db.collection('hotels');
