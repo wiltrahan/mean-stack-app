@@ -34,9 +34,11 @@ app.use(function(req, res, next) {
 //need to define new routes. using this allows us to get rid of the commented out
 //path to the homepage below. now it looks for static routes that starts with the public folder giving you access to the html, CSS, jquery, images, etc.
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 
 app.use(bodyParser.urlencoded({ extended : false }));
+app.use(bodyParser.json());
 
 //looks in the routes folder, and sets api as the beginning of the path
 app.use('/api', routes);
